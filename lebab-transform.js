@@ -7,8 +7,8 @@ var opts = JSON.parse(process.argv[2]);
 if (!opts.options) opts.options = {};
 if (opts.filename) opts.options.filename = opts.filename;
 
-console.log("Opts")
-console.dir(opts);
+// console.log("Opts")
+// console.dir(opts);
 
 (function(done) {
 
@@ -25,7 +25,6 @@ console.dir(opts);
 		resolve('lebab', ropts, function(err, file, pkg) {
 			// this calls the function below when done
 			if (!err) {
-				// throw new Error('Found lebab');
 				return done(require(file), {
 					file: file,
 					pkg: pkg
@@ -47,8 +46,8 @@ console.dir(opts);
 
 	// lebab is a Transformer object
 	// row contains package.json for lebab
-	console.log("lebab:")
-	console.dir(lebab)
+	// console.log("lebab:")
+	// console.dir(lebab)
 		// console.dir(row)
 
 	// this function gets called when the function at line 12 is finished, by calling done() at line ~24
@@ -61,8 +60,8 @@ console.dir(opts);
 		// debugLog += '// ' + JSON.stringify(opts) + '\n';
 	}
 
-	console.log("DebugLog");
-	console.log(debugLog);
+	// console.log("DebugLog");
+	// console.log(debugLog);
 
 	stdin().then(function(data) {
 
@@ -70,14 +69,20 @@ console.dir(opts);
 			// console.log("data:")
 			// console.log(data)
 
-			var code = "Must run lebab" // babel.transform(data, opts.options).code;
+			var code = "" // babel.transform(data, opts.options).code;
+			myLebabTransformer = new lebab.Transformer
+
+			myLebabTransformer.read(data);
+			myLebabTransformer.applyTransformations();
+			
+			code = myLebabTransformer.out();
+
 			if (opts.debug) {
 				code += debugLog;
 			}
 			if (opts.newline_at_eof && code[code.length - 1] !== '\n') {
 				code += '\n';
 			}
-			throw new Error("Code:\n\n" + code)
 
 			process.stdout.write(code);
 		} catch (err) {
