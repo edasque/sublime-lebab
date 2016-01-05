@@ -1,0 +1,16 @@
+{
+  "name": "sublime-lebab",
+  "version": "0.0.1",
+  "description": "Lebab conversion for Sublime Text",
+  "main": "lebab-transform.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erik Dasque",
+  "license": "MIT",
+  "dependencies": {
+    "get-stdin": "^5.0.1",
+    "path": "^0.12.7",
+    "resolve": "^1.1.6"
+  }
+}
